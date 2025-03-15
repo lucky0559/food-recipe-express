@@ -3,24 +3,41 @@ const menuTypeDef = `#graphql
     _id: ID!
     name: String!
     image: String!
+    description: String!
     recipes: [String!]!
     procedures: [String!]
+    category: [String!]
   }
 
   type Query {
-    menus: [Menu]!
-    menu(menuId:ID!): Menu
+    allMenu: [Menu!]
+    menuById(menuId:ID!): Menu
+    menuByCategory(category:[String]): [Menu!]
   }
 
   type Mutation {
-    createMenu(input: AddMenuInput!): Menu
+    createMenu(input: CreateMenuInput!): Menu!
+    updateMenu(input: UpdateMenuInput!): Menu!
+    deleteMenu(menuId: ID!): Menu!
   }
 
-  input AddMenuInput {
+  input CreateMenuInput {
     name: String!
     image: String!
+    description: String!
     recipes: [String!]
     procedures: [String!]
+    category: [String!]
+  }
+
+  input UpdateMenuInput {
+    menuId: ID!
+    name: String!
+    image: String!
+    description: String!
+    recipes: [String!]
+    procedures: [String!]
+    category: [String!]
   }
 `;
 

@@ -11,11 +11,19 @@ const menuSchema = new mongoose.Schema(
       required: true,
       unique: true
     },
+    description: {
+      type: String,
+      required: true
+    },
     recipes: {
       type: [String],
       required: true
     },
     procedures: {
+      type: [String],
+      required: true
+    },
+    category: {
       type: [String],
       required: true
     }

@@ -4,6 +4,7 @@ export const menus = [
     name: "Afritada",
     image: "image.jpg",
     recipes: ["Chicken", "Kethup"],
-    procedures: ["Chop chicken", "Boil water"]
+    procedures: ["Chop chicken", "Boil water"],
+    category: ["Chicken"]
   }
 ];
