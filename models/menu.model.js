@@ -7,7 +7,7 @@ const menuSchema = new mongoose.Schema(
       required: true
     },
     image: {
-      type: String,
+      type: String || File,
       required: true,
       unique: true
     },

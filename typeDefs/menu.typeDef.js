@@ -2,7 +2,7 @@ const menuTypeDef = `#graphql
   type Menu {
     _id: ID!
     name: String!
-    image: String!
+    image: Upload!
     description: String!
     recipes: [String!]!
     procedures: [String!]
@@ -21,9 +21,16 @@ const menuTypeDef = `#graphql
     deleteMenu(menuId: ID!): Menu!
   }
 
+  scalar Upload
+
+  input ImageInput {
+    file: Upload
+    url: String
+  }
+
   input CreateMenuInput {
     name: String!
-    image: String!
+    image: Upload!
     description: String!
     recipes: [String!]
     procedures: [String!]

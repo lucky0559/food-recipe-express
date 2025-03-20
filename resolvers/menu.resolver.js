@@ -30,11 +30,13 @@ const menuResolver = {
     }
   },
   Mutation: {
-    createMenu: async (_, { input }, context) => {
+    createMenu: async (_, { input }) => {
       try {
-        const newMenu = new Menu({ ...input });
-        await newMenu.save();
-        return newMenu;
+        console.log(input);
+
+        // const newMenu = new Menu({ ...input });
+        // await newMenu.save();
+        return input;
       } catch (e) {
         console.error("Error adding new menu: ", e);
         throw new Error("Error adding new menus");
