@@ -11,6 +11,7 @@ import { connectDb } from "./db/connectDb.js";
 import { v2 as cloudinary } from "cloudinary";
 import multer from "multer";
 import { CloudinaryStorage } from "multer-storage-cloudinary";
+import { graphqlUploadExpress } from "graphql-upload";
 
 // Configure Cloudinary
 cloudinary.config({
@@ -47,7 +48,8 @@ const server = new ApolloServer({
   typeDefs: mergedTypeDefs,
   resolvers: mergedResolvers,
   plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
-  context: ({ req }) => ({ req })
+  context: ({ req }) => ({ req }),
+  uploads: false
 });
 
 // Passing an ApolloServer instance to the `startStandaloneServer` function:
@@ -66,9 +68,15 @@ app.use(
   "/graphql",
   cors({
     origin: "http://localhost:5173",
-    credentials: true
+    credentials: true,
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+      "Apollo-Require-Preflight"
+    ]
   }),
   express.json(),
+  graphqlUploadExpress(),
   // expressMiddleware accepts the same arguments:
   // an Apollo Server instance and optional configuration options
   expressMiddleware(server)

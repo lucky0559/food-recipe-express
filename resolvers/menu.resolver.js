@@ -1,7 +1,11 @@
 import { menus } from "#root/mockData/data..js";
 import Menu from "../models/menu.model.js";
+import { GraphQLUpload } from "graphql-upload";
+import path from "path";
+import { v2 as cloudinary } from "cloudinary";
 
 const menuResolver = {
+  Upload: GraphQLUpload,
   Query: {
     allMenu: async (_, a, context) => {
       try {
@@ -32,10 +36,28 @@ const menuResolver = {
   Mutation: {
     createMenu: async (_, { input }) => {
       try {
-        console.log(input);
+        if (!input.image) {
+          throw new Error("No file uploaded!");
+        }
+        // const { createReadStream } = await input.image;
 
-        // const newMenu = new Menu({ ...input });
-        // await newMenu.save();
+        // // UPLOADING FILE
+        // const uploadStream = await new Promise((resolve, reject) => {
+        //   const stream = cloudinary.uploader.upload_stream(
+        //     { folder: "food-recipe" },
+        //     (error, result) => {
+        //       if(error) reject(error);
+        //       resolve(result);
+        //     }
+        //   )
+        //   createReadStream().pipe(stream);
+        // })
+
+        input.image = {
+          url: "uploadStream.secure_url"
+        };
+        // return input;
+
         return input;
       } catch (e) {
         console.error("Error adding new menu: ", e);

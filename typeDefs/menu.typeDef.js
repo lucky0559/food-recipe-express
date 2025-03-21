@@ -1,8 +1,14 @@
 const menuTypeDef = `#graphql
+  scalar Upload
+
+  type FileResponse {
+    url: String!
+  }
+
   type Menu {
     _id: ID!
     name: String!
-    image: Upload!
+    image: FileResponse!
     description: String!
     recipes: [String!]!
     procedures: [String!]
@@ -20,8 +26,6 @@ const menuTypeDef = `#graphql
     updateMenu(input: UpdateMenuInput!): Menu!
     deleteMenu(menuId: ID!): Menu!
   }
-
-  scalar Upload
 
   input ImageInput {
     file: Upload
