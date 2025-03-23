@@ -6,10 +6,9 @@ const menuSchema = new mongoose.Schema(
       type: String,
       required: true
     },
-    image: {
-      type: String || File,
-      required: true,
-      unique: true
+    imageUrl: {
+      type: String,
+      required: true
     },
     description: {
       type: String,

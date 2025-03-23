@@ -38,7 +38,7 @@ const menuResolver = {
         if (!input.image) {
           throw new Error("No file uploaded!");
         }
-        const { createReadStream, filename, mimetype } = await input.image;
+        const { createReadStream, filename } = await input.image;
 
         // UPLOADING FILE
         const uploadStream = await new Promise((resolve, reject) => {
@@ -48,11 +48,14 @@ const menuResolver = {
 
         console.log(uploadStream);
 
-        input.image = {
-          url: uploadStream.secure_url
-        };
+        const m = { ...input, imageUrl: uploadStream.secure_url };
+        delete m.image;
 
-        return input;
+        const newMenu = new Menu(m);
+
+        await newMenu.save();
+
+        return m;
       } catch (e) {
         console.error("Error adding new menu: ", e);
         throw new Error("Error adding new menus");
