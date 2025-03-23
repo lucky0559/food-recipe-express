@@ -1,8 +1,7 @@
 import { menus } from "#root/mockData/data..js";
+import { cdn } from "../lib/index.js";
 import Menu from "../models/menu.model.js";
 import { GraphQLUpload } from "graphql-upload";
-import path from "path";
-import { v2 as cloudinary } from "cloudinary";
 
 const menuResolver = {
   Upload: GraphQLUpload,
@@ -39,24 +38,19 @@ const menuResolver = {
         if (!input.image) {
           throw new Error("No file uploaded!");
         }
-        // const { createReadStream } = await input.image;
+        const { createReadStream, filename, mimetype } = await input.image;
 
-        // // UPLOADING FILE
-        // const uploadStream = await new Promise((resolve, reject) => {
-        //   const stream = cloudinary.uploader.upload_stream(
-        //     { folder: "food-recipe" },
-        //     (error, result) => {
-        //       if(error) reject(error);
-        //       resolve(result);
-        //     }
-        //   )
-        //   createReadStream().pipe(stream);
-        // })
+        // UPLOADING FILE
+        const uploadStream = await new Promise((resolve, reject) => {
+          const uStream = cdn(filename, reject, resolve);
+          createReadStream().pipe(uStream);
+        });
+
+        console.log(uploadStream);
 
         input.image = {
-          url: "uploadStream.secure_url"
+          url: uploadStream.secure_url
         };
-        // return input;
 
         return input;
       } catch (e) {

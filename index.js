@@ -10,28 +10,27 @@ import dotenv from "dotenv";
 import { connectDb } from "./db/connectDb.js";
 import { v2 as cloudinary } from "cloudinary";
 import multer from "multer";
-import { CloudinaryStorage } from "multer-storage-cloudinary";
+// import { CloudinaryStorage } from "multer-storage-cloudinary";
 import { graphqlUploadExpress } from "graphql-upload";
 
-// Configure Cloudinary
+dotenv.config();
+
+// Configure Multer with Cloudinary
+// const storage = new CloudinaryStorage({
+//   cloudinary,
+//   params: {
+//     folder: "uploads", // Cloudinary folder name
+//     public_id: (req, file) => file.originalname.split(".")[0] // Use original filename
+//   }
+// });
+
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.CLOUD_API_KEY,
   api_secret: process.env.CLOUD_API_SECRET
 });
 
-// Configure Multer with Cloudinary
-const storage = new CloudinaryStorage({
-  cloudinary,
-  params: {
-    folder: "uploads", // Cloudinary folder name
-    public_id: (req, file) => file.originalname.split(".")[0] // Use original filename
-  }
-});
-
-export const upload = multer({ storage });
-
-dotenv.config();
+// export const upload = multer({ storage });
 
 // Required logic for integrating with Express
 const app = express();

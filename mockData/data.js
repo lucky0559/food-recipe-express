@@ -8,8 +8,3 @@ export const menus = [
     category: ["Chicken"]
   }
 ];
-
-// MONGO_URI=mongodb+srv://luckyme:luckymebitemedaily@cluster0.db2vh.mongodb.net/bitemedaily?retryWrites=true&w=majority&appName=Cluster0
-// CLOUD_NAME=intro-pl
-// CLOUD_API_KEY=212394981787341
-// CLOUD_API_SECRET=bJCTvK3DZMEJtqqcX6egzXwwigU
