@@ -8,7 +8,7 @@ const menuTypeDef = `#graphql
     description: String!
     recipes: [String!]!
     procedures: [String!]
-    category: [String!]
+    categories: [String!]
   }
 
   type Query {
@@ -34,7 +34,7 @@ const menuTypeDef = `#graphql
     description: String!
     recipes: [String!]
     procedures: [String!]
-    category: [String!]
+    categories: [String!]
   }
 
   input UpdateMenuInput {
@@ -44,7 +44,7 @@ const menuTypeDef = `#graphql
     description: String!
     recipes: [String!]
     procedures: [String!]
-    category: [String!]
+    categories: [String!]
   }
 `;
 

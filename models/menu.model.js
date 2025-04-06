@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+// TODO: REFACTOR RECIPES AND PROCEDURES INTO TEXT FORM ONLY NOT IN ARRAY FORM
 const menuSchema = new mongoose.Schema(
   {
     name: {
@@ -22,7 +22,7 @@ const menuSchema = new mongoose.Schema(
       type: [String],
       required: true
     },
-    category: {
+    categories: {
       type: [String],
       required: true
     }

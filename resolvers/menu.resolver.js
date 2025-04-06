@@ -8,7 +8,10 @@ const menuResolver = {
   Query: {
     allMenu: async (_, a, context) => {
       try {
-        // if(!context.getUser()) throw new Error("Unauthorized")
+        console.log("A: ", a);
+        console.log("Context: ", context);
+
+        const menus = Menu.find();
         return menus;
       } catch (e) {
         console.error("Error getting all menu: ", e);
